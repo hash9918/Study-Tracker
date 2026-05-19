@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { login, apiUrl } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -12,6 +13,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     try {
       const res = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
@@ -53,6 +60,16 @@ const Register = () => {
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-400 mb-1">Confirm Password</label>
+            <input 
+              type="password" 
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
           </div>
