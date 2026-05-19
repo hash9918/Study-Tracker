@@ -2,6 +2,8 @@
 
 A modern, minimal MERN stack application that allows users to build a custom daily schedule, track completed blocks, and visualize their consistency via a heatmap and streak counter.
 
+🚀 **Live Demo:** [https://study-tracker-one-psi.vercel.app](https://study-tracker-one-psi.vercel.app)
+
 ## Features
 
 - **Custom Schedule Builder**: Set your own time blocks for each day, dynamically incrementing as you add tasks.
