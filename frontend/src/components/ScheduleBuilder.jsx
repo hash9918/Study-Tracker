@@ -7,7 +7,7 @@ const ScheduleBuilder = ({ onUpdate }) => {
   const [blocks, setBlocks] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [newStartTime, setNewStartTime] = useState('09:00');
-  const [newEndTime, setNewEndTime] = useState('10:00');
+  const [newEndTime, setNewEndTime] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
   
   const { apiUrl, token } = useContext(AuthContext);
@@ -56,14 +56,9 @@ const ScheduleBuilder = ({ onUpdate }) => {
       updatedBlocks.push(newBlock);
       
       const nextStart = addMinutes(newEndTime, 5);
-      // Determine previous block duration to carry it over
-      const [startH, startM] = newStartTime.split(':').map(Number);
-      const [endH, endM] = newEndTime.split(':').map(Number);
-      const durationMins = (endH * 60 + endM) - (startH * 60 + startM);
-      const nextEnd = addMinutes(nextStart, durationMins > 0 ? durationMins : 60);
       
       setNewStartTime(nextStart);
-      setNewEndTime(nextEnd);
+      setNewEndTime('');
     }
 
     updatedBlocks.sort((a, b) => a.startTime.localeCompare(b.startTime));
